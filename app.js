@@ -12,15 +12,34 @@ app.get("/", function(req, res){
 
 app.post("/", function(req, res){
 
-  var firstName = req.body.fName;
-  var lastName = req.body.lName;
-  var email = req.body.email;
+  const firstName = req.body.fName;
+  const lastName = req.body.lName;
+  const email = req.body.email;
 
-  console.log(firstName, lastName, email);
+  const data = {
+    members: [
+      {
+        email_address: email,
+        status: "subscribed",
+        merge_fields: {
+          FNAME: firstName,
+          LNAME: lastName,
+        }
+      }
+    ]
+  };
 
+  const jsonData = JSON.stringify(data); 
 
 });
 
 app.listen(5000, function(){
   console.log("Server is running on port 5000"); 
 });
+
+
+// API Key
+// 91bbeb4d5dd98c59743d8ef89506da11-us21
+
+// Audiance id
+// 1153a27d34
