@@ -36,10 +36,17 @@ app.post("/", function(req, res){
 
   const options = {
     method: "POST",
-    auth: "achana1:9ee4536f459e2f998a8abb30735d02ea-us21"
+    auth: "achana1:bd5e401122d842c36c9b2ff7d5497094-us21"
   }
 
   const request = https.request(url, options, function(response){
+
+    if (response.statusCode === 200) {
+      res.sendFile(__dirname + "/success.html");
+    } else {
+      res.sendFile(__dirname + "/failure.html");
+    }
+
     response.on("data", function(data){
       console.log(JSON.parse(data));
     })
@@ -50,13 +57,17 @@ app.post("/", function(req, res){
 
 });
 
+app.post("/failure", function(req, res){
+  res.redirect("/")
+})
+
 app.listen(5000, function(){
   console.log("Server is running on port 5000"); 
 });
 
 
 // API Key
-// 9ee4536f459e2f998a8abb30735d02ea-us21
+// bd5e401122d842c36c9b2ff7d5497094-us21
 
 // Audiance id
 // 1153a27d34
